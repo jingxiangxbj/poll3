@@ -89,7 +89,7 @@ public class UserController {
 	}
 	
 	
-	@ApiOperation(value="多选删除")
+	@ApiOperation(value="批量删除")
 	@GetMapping("batchDelete")
 	public String batchDelete(@RequestParam List<Long> ids){
 		try{
