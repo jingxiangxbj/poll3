@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.briup.apps.poll.bean.Clazz;
 import com.briup.apps.poll.bean.User;
 import com.briup.apps.poll.service.IUserService;
 import com.briup.apps.poll.util.MsgResponse;
@@ -64,15 +66,26 @@ public class UserController {
 		}
 	}
 	
-	@ApiOperation(value="保存更新用户信息")
-	@GetMapping("saveOrUpdate")
-	public MsgResponse saveOrUpdate(User user){
-		try{
-			userService.saveOrUpdate(user);
-			return MsgResponse.success("success", user);
-		}catch (Exception e){
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
+	@ApiOperation(value="保存或更新")
+	@GetMapping("/saveOrupdate")
+	public String saveOrUpdate(User user){
+		if (user.getId()!=null){
+			try {
+				userService.saveOrUpdate(user);
+				return "更改成功";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "更改失败"+e.getMessage();
+			}
+		}
+		else{
+			try {
+				userService.saveOrUpdate(user);
+				return "保存成功";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "保存失败"+e.getMessage();
+			}
 		}
 	}
 	
