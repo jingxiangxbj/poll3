@@ -40,8 +40,9 @@ public class UserController {
 	@ApiOperation(value="通过id查询用户信息")
 	@GetMapping("fingById")
 	public MsgResponse findById(long id){
-		User list= new User();
+		
 		try{
+			User list= new User();
 			list=userService.findById(id);
 			return MsgResponse.success("success", list);
 		}catch (Exception e){
