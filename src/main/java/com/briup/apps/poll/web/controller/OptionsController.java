@@ -69,7 +69,7 @@ public class OptionsController {
 		
 	}
 	//跟新或插入选题
-	@ApiOperation(value="跟新或插入选题")
+	@ApiOperation(value="更新或插入")
 	@RequestMapping(value="saveOrUpdate",method=RequestMethod.POST)
 	public String saveOrUpdate(Options option) {
 		try {
@@ -103,7 +103,7 @@ public class OptionsController {
 		}	
 	}
 	@ApiOperation(value="根据给出的id集合删除")
-	@RequestMapping(value="根据给出的id集合删除")
+	@RequestMapping(value=" batchDelete",method=RequestMethod.POST)
 	public String batchDelete(List<Long> ids) {
 		try {
 			optionsService.batchDelete(ids);
