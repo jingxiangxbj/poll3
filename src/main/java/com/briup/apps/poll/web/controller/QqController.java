@@ -51,6 +51,20 @@ public class QqController {
 		}
   	
   }
+  @ApiOperation(value="通过id查找题目问卷信息")
+  @GetMapping("findQqById")
+  public MsgResponse findQqById(@RequestParam long id){
+
+  	try {
+  		qqService.findById(id);
+  		return MsgResponse.success("success",qqService.findAll());
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		//返回失败
+		return MsgResponse.error(e.getMessage());
+	}
+  	}
   @ApiOperation(value="通过id删除题目问卷信息")
   @GetMapping("deleteQqById")
   public String deleteQqById(@RequestParam long id){
@@ -67,7 +81,6 @@ public class QqController {
   @ApiOperation(value="通过id批量删除题目问卷信息")
   @GetMapping("batchDelete")
   public String batchDelete(@RequestParam long ids){
-//  	调用service层代码完成批量题目问卷信息的删除
   	try {
   		qqService.batchDelete(ids);
   		return "删除成功!";
