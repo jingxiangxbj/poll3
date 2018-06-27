@@ -1,9 +1,6 @@
 package com.briup.apps.poll.service.impl;
 
 
-
-
-
 import java.util.List;
 
 
@@ -13,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Grade;
 import com.briup.apps.poll.bean.GradeExample;
+import com.briup.apps.poll.bean.extend.GradeVM;
 import com.briup.apps.poll.dao.GradeMapper;
+import com.briup.apps.poll.dao.extend.GradeVMMapper;
 import com.briup.apps.poll.service.IGradeService;
 
 @Service
@@ -21,6 +20,9 @@ public class GradeServiceImpl implements IGradeService{
 
 	@Autowired
 	private GradeMapper gradeMapper;
+	
+	@Autowired
+	private GradeVMMapper gradeVMMapper;
 	
 	//查找所有
 	@Override
@@ -76,5 +78,13 @@ public class GradeServiceImpl implements IGradeService{
 		for(long id : ids)
 			gradeMapper.deleteByPrimaryKey(id);
 		
+	}
+
+	
+	//外键查询school_id
+	@Override
+	public List<GradeVM> selectAll() throws Exception {
+		
+		return gradeVMMapper.selectAll();
 	}
 }
