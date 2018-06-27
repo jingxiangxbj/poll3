@@ -3,6 +3,7 @@ package com.briup.apps.poll.service;
 import java.util.List;
 
 import com.briup.apps.poll.bean.Grade;
+import com.briup.apps.poll.bean.extend.GradeVM;
 
 public interface IGradeService {
 	
@@ -23,5 +24,9 @@ public interface IGradeService {
 	
 	//批量删除
 	void batchDelete(Long[] ids) throws Exception;
+	
+	
+	//外键链接查询
+	List<GradeVM> selectAll() throws Exception;
 
 }
