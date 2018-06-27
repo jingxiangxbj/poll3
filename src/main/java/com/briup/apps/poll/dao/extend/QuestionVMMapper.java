@@ -6,5 +6,5 @@ import com.briup.apps.poll.bean.extend.QuestionVM;
 
 public interface QuestionVMMapper {
 
-	List<QuestionVM> selectAll1();
+	List<QuestionVM> selectAll();
 }

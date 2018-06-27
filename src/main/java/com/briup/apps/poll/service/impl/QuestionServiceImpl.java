@@ -70,7 +70,7 @@ public class QuestionServiceImpl implements IQuestionService{
 	@Override
 	public List<QuestionVM> findAllQuestionVM() throws Exception {
 		// TODO Auto-generated method stub
-		return questionVMMapper.selectAll1();
+		return questionVMMapper.selectAll();
 	}
 	
 	
