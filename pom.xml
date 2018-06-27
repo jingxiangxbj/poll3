@@ -46,12 +46,12 @@
 			<scope>test</scope>
 		</dependency>
 		
-			<!-- 热部署 -->
+		<!-- 热部署 -->
 	    <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-				<!-- swagger -->
+		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
