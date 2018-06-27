@@ -24,7 +24,7 @@ public class QuestionController {
 	
 	@Autowired
 	private IQuestionService questionService;
-	
+	@ApiOperation(value="查询题库信息时显示选项")
 	@GetMapping("findAllQuestionVM")
 	public MsgResponse findAllQuestionVM(){
 		try {
@@ -118,6 +118,35 @@ public class QuestionController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="更新保存题库信息",notes="如果id为空，则保存信息，否则是更新信息,并且提交相关选项 " )
+	@PostMapping("saveOrUpdateQuestion")
+	public MsgResponse saveOrUpdateQuestion(Question question){
+		try {
+			questionService.saveOrUpdate(question);
+			return MsgResponse.success("success",null );
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//返回失败
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@ApiOperation(value="保存或修改问题",
+  			notes="当id不为空表示修改，否则表示更新，保存和更新的时候需要提交选项数据")
+  	@PostMapping("saveOrUpdateQuestionVM")
+ 	public MsgResponse saveOrUpdateQuestionVM(QuestionVM questionVM){
+ 		try {
+ 			questionService.saveOrUpdateVM(questionVM);
+ 			return MsgResponse.success("保存成功", null);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 			return MsgResponse.error(e.getMessage());
+ 		}
+ 		
+ 	}
+ 	
+ 	
+ 
 
 
 }
