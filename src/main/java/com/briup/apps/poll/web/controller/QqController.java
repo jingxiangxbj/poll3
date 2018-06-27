@@ -20,8 +20,12 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/qq")
 public class QqController {
+	
+	
 	@Autowired
 	private IQqService qqService;
+	
+	
 	@ApiOperation(value="查询题目问卷信息")
 	@GetMapping("findAllQq")
 	public MsgResponse findAllQq(){
@@ -57,7 +61,7 @@ public class QqController {
 
   	try {
   		qqService.findById(id);
-  		return MsgResponse.success("success",qqService.findAll());
+  		return MsgResponse.success("success",qqService.findById(id));
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -78,9 +82,12 @@ public class QqController {
 		}
   	
   }
+  
+  
   @ApiOperation(value="通过id批量删除题目问卷信息")
   @GetMapping("batchDelete")
-  public String batchDelete(@RequestParam long ids){
+  public String batchDelete(@RequestParam List<Long> ids){
+	  
   	try {
   		qqService.batchDelete(ids);
   		return "删除成功!";

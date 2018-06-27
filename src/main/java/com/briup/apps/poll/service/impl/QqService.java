@@ -61,11 +61,7 @@ public class QqService implements IQqService {
 		}
 	}
 
-	@Override
-	public void batchDelete(long ids) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 }

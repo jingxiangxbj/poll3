@@ -14,7 +14,6 @@ public interface IQqService {
 	
 	void deleteById(long id) throws Exception;
 	
-	void batchDelete(long ids) throws Exception;
 
 	void batchDelete(List<Long> ids) throws Exception;
 

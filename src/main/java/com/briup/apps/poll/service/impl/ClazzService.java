@@ -1,16 +1,24 @@
 package com.briup.apps.poll.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.briup.apps.poll.bean.Clazz;
 import com.briup.apps.poll.bean.ClazzExample;
+import com.briup.apps.poll.bean.extend.ClazzVM;
 import com.briup.apps.poll.dao.ClazzMapper;
+import com.briup.apps.poll.dao.extend.ClazzVMMapper;
 import com.briup.apps.poll.service.IClazzService;
 @Service
 public class ClazzService implements IClazzService {
 	@Autowired
 	private ClazzMapper clazzMapper;
+	
+	@Autowired
+	private ClazzVMMapper clazzVMMapper;
+	
 	@Override
 	public List<Clazz> findAll() throws Exception {
 		// TODO Auto-generated method stub
@@ -56,6 +64,12 @@ public class ClazzService implements IClazzService {
 		for(Long id:ids){
 			clazzMapper.deleteByPrimaryKey(id);
 		}
+	}
+
+	@Override
+	public List<ClazzVM> findAllClazzVM() throws Exception {
+		// TODO Auto-generated method stub
+		return clazzVMMapper.selectAll();
 	}
 
 }
