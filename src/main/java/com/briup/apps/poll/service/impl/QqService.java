@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Qq;
 import com.briup.apps.poll.bean.QqExample;
+import com.briup.apps.poll.bean.extend.QqVM;
 import com.briup.apps.poll.dao.QqMapper;
+import com.briup.apps.poll.dao.extend.QqVMMapper;
 import com.briup.apps.poll.service.IQqService;
 
 @Service
@@ -15,7 +17,8 @@ public class QqService implements IQqService {
 
 	@Autowired
 	private QqMapper qqMapper;
-	
+	@Autowired
+	private QqVMMapper qqVMMapper;
 	@Override
 	public List<Qq> findAll() throws Exception {
 		// TODO Auto-generated method stub
@@ -59,6 +62,14 @@ public class QqService implements IQqService {
 		for(long id:ids){
 			qqMapper.deleteByPrimaryKey(id);
 		}
+	}
+
+
+
+	@Override
+	public List<QqVM> findAllQqVM() throws Exception {
+		// TODO Auto-generated method stub
+		return qqVMMapper.selectAll();
 	}
 
 

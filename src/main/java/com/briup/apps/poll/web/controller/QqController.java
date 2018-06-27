@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Qq;
+import com.briup.apps.poll.bean.extend.QqVM;
 import com.briup.apps.poll.service.IQqService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -25,6 +26,20 @@ public class QqController {
 	@Autowired
 	private IQqService qqService;
 	
+	
+	@GetMapping("findAllQqVM")
+	public MsgResponse findAllQqVM(){
+		try {
+		List<QqVM> list = qqService.findAllQqVM();
+			//返回成功
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//返回失败
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	
 	@ApiOperation(value="查询题目问卷信息")
 	@GetMapping("findAllQq")
