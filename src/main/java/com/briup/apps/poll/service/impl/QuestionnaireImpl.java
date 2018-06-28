@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Questionnaire;
 import com.briup.apps.poll.bean.QuestionnaireExample;
+import com.briup.apps.poll.bean.extend.QuestionnaireVM;
 import com.briup.apps.poll.dao.QuestionnaireMapper;
+import com.briup.apps.poll.dao.extend.QuestionnaireVMMapper;
 import com.briup.apps.poll.service.IQuestionnaireService;
 @Service
 public class QuestionnaireImpl implements IQuestionnaireService{
@@ -56,8 +58,13 @@ public class QuestionnaireImpl implements IQuestionnaireService{
 		// TODO Auto-generated method stub
 	for (long id : ids) {
 		questionnaireMapper.deleteByPrimaryKey(id);
+	}			 
 	}
-			
-			 
+	@Autowired
+	private QuestionnaireVMMapper questionnaireVMMapper;
+	@Override
+	public List<QuestionnaireVM> findAllQuestionnaireVM() throws Exception {
+		// TODO Auto-generated method stub
+		return questionnaireVMMapper.selectAll();
 	}
 }

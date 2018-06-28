@@ -2,6 +2,8 @@ package com.briup.apps.poll.dao;
 
 import com.briup.apps.poll.bean.Question;
 import com.briup.apps.poll.bean.QuestionExample;
+import com.briup.apps.poll.bean.extend.QuestionVM;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -93,4 +95,5 @@ public interface QuestionMapper {
      * @mbg.generated Mon Jun 25 19:36:12 CST 2018
      */
     int updateByPrimaryKey(Question record);
+    
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.briup.apps.poll.bean.Questionnaire;
+import com.briup.apps.poll.bean.extend.QuestionnaireVM;
 import com.briup.apps.poll.service.IQuestionnaireService;
 import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
@@ -21,6 +22,20 @@ import io.swagger.annotations.ApiOperation;
 public class QuestionnaireController {
 	@Autowired
 	private IQuestionnaireService questionnaireService;
+	
+	@GetMapping("findAllQuestionnaireVM")
+	public MsgResponse findAllQuestionnaireVM(){
+		try {
+			List<QuestionnaireVM> list=questionnaireService.findAllQuestionnaireVM();
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//返回失败
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
 	@ApiOperation(value="查询所有")
 	@GetMapping("findAll")
 	public MsgResponse findAll(){
