@@ -18,4 +18,16 @@
   <select id="selectAll" resultMap="GradeVMResultMap">
        select * from poll_grade
   </select>
+  
+  
+  
+  <select id="selectById" resultMap="GradeVMResultMap">
+       select * from poll_grade where id = #{id}
+  </select>
+  
+  
+   <select id="query" resultMap="GradeVMResultMap">
+       select * from poll_grade where name like "%"#{name}"%"
+  </select>
+  
 </mapper>

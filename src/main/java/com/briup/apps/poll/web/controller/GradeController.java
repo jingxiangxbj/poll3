@@ -24,19 +24,20 @@ public class GradeController {
 	
 	@Autowired
 	private IGradeService gradeService;
-	
-	@ApiOperation(value="查询所有")
-	@GetMapping("findAllGrade")
-	public MsgResponse findAllGrade(){
-		try {
-			List<Grade> list = gradeService.findAll();
-			return MsgResponse.success("success", list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
-		
-	}
+//	
+//	@ApiOperation(value="查询所有")
+//	@GetMapping("findAllGrade")
+//	public MsgResponse findAllGrade(){
+//		try {
+//			List<Grade> list = gradeService.findAll();
+//			return MsgResponse.success("success", list);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return MsgResponse.error(e.getMessage());
+//		}
+//		
+//	}
+//	
 	
 	@ApiOperation(value="按id删除年级信息")
 	@GetMapping("deleteById")
@@ -49,21 +50,23 @@ public class GradeController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="按id查找年级信息")
-	@GetMapping("findById")
-	public MsgResponse findById(@RequestParam long id){
+	
+	@ApiOperation(value="按id查找年级信息(包括school_id)")
+	@GetMapping("selectGradeById")
+	public MsgResponse selectGradeById(@RequestParam long id){
 		try {
-			return MsgResponse.success("success", gradeService.findById(id));
+			return MsgResponse.success("success", gradeService.selectById(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="按关键字查找")
+	
+	@ApiOperation(value="按关键字查找(包括school_id)")
 	@GetMapping("queryKeywords")
 	public MsgResponse queryKeywords(@RequestParam String keywords){
 		try {
-			List<Grade> list = gradeService.query(keywords);
+			List<GradeVM> list = gradeService.query(keywords);
 		    return MsgResponse.success("success", list);
 		    
 		} catch (Exception e) {
@@ -72,6 +75,7 @@ public class GradeController {
 		}
 		
 	}
+	
 	@ApiOperation(value="批量删除",notes="输入id并用逗号隔开，如：3,4,5")
 	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(Long[] ids){
@@ -94,7 +98,9 @@ public class GradeController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="查询school_id")
+	
+	
+	@ApiOperation(value="查询所有(包括school_id)")
 	@GetMapping("findAllGradeVM")
 	public MsgResponse findAllGradeVM(){
 		try {

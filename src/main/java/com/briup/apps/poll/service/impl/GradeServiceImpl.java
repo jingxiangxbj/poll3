@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Grade;
-import com.briup.apps.poll.bean.GradeExample;
 import com.briup.apps.poll.bean.extend.GradeVM;
 import com.briup.apps.poll.dao.GradeMapper;
 import com.briup.apps.poll.dao.extend.GradeVMMapper;
@@ -24,29 +23,29 @@ public class GradeServiceImpl implements IGradeService{
 	@Autowired
 	private GradeVMMapper gradeVMMapper;
 	
-	//查找所有
-	@Override
-	public List<Grade> findAll() throws Exception {
-	
-		GradeExample example = new GradeExample();
-		return gradeMapper.selectByExampleWithBLOBs(example);
-	}
+//	//查找所有
+//	@Override
+//	public List<Grade> findAll() throws Exception {
+//	
+//		GradeExample example = new GradeExample();
+//		return gradeMapper.selectByExampleWithBLOBs(example);
+//	}
 
 	//按id查找
 	@Override
-	public Grade findById(long id) throws Exception {
+	public GradeVM selectById(long id) throws Exception {
 		
-		return gradeMapper.selectByPrimaryKey(id);
+		return gradeVMMapper.selectById(id);
 	}
 	
 
 	//按关键字查找
 	@Override
-	public List<Grade> query(String keywords) throws Exception {
+	public List<GradeVM> query(String keywords) throws Exception {
 		
-		GradeExample example = new GradeExample();
-		example.createCriteria().andNameLike("%"+keywords+"%");
-		return gradeMapper.selectByExampleWithBLOBs(example);
+//		GradeExample example = new GradeExample();
+//		example.createCriteria().andNameLike("%"+keywords+"%");
+		return gradeVMMapper.query(keywords);
 	}
 
 	

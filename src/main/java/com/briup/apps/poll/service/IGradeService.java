@@ -7,14 +7,12 @@ import com.briup.apps.poll.bean.extend.GradeVM;
 
 public interface IGradeService {
 	
-	//查找所有
-    List<Grade> findAll() throws Exception;
+
+    //根据id查找所有(school_id)
+    GradeVM selectById(long id) throws Exception;
 	
-    //根据id查找
-    Grade findById(long id) throws Exception;
-	
-    //根据关键字查找
-	List<Grade> query(String keywords) throws Exception;
+    //根据关键字查找(school_id)
+	List<GradeVM> query(String keywords) throws Exception;
 	
 	//保存及修改
 	void saveOrUpdate(Grade grade) throws Exception;
@@ -26,7 +24,7 @@ public interface IGradeService {
 	void batchDelete(Long[] ids) throws Exception;
 	
 	
-	//外键链接查询
+	//外键链接查询所有(school_id)
 	List<GradeVM> selectAll() throws Exception;
 
 }
