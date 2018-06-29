@@ -24,6 +24,7 @@ public class QuestionController {
 	
 	@Autowired
 	private IQuestionService questionService;
+	
 	@ApiOperation(value="查询题库信息时显示选项")
 	@GetMapping("findAllQuestionVM")
 	public MsgResponse findAllQuestionVM(){
@@ -38,23 +39,9 @@ public class QuestionController {
 		}
 	}
 	
-	
-	@ApiOperation(value="查询所有题库信息")
-	@GetMapping("findAllQuestion")
-	public MsgResponse findAllQuestion(){
-		try {
-			List<Question> list=questionService.findAll();
-			return MsgResponse.success("success", list);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			//返回失败
-			return MsgResponse.error(e.getMessage());
-		}
-	}
-	@ApiOperation(value="通过id查询题库信息")
-	@GetMapping("findById")
-	public MsgResponse findById(Long id){
+	@ApiOperation(value="通过id查询题库信息，并且显示选项信息")
+	@GetMapping("findByIdVM")
+	public MsgResponse findByIdVM(Long id){
 		try {			
 			return MsgResponse.success("success", questionService.findById(id));
 		} catch (Exception e) {
@@ -63,8 +50,8 @@ public class QuestionController {
 			//返回失败
 			return MsgResponse.error(e.getMessage());
 		}
-	
 	}
+	
 	@ApiOperation(value="通过id删除题库信息" )
 	@GetMapping("deleteById")
 	public MsgResponse deleteById(@RequestParam long id){
@@ -79,11 +66,12 @@ public class QuestionController {
 		}
 	
 	}
+	
 	@ApiOperation(value="通过关键词查询题库信息" )
 	@GetMapping("query")
 	public MsgResponse query(String keywords){
 		try {
-			List<Question> list=questionService.query(keywords);
+			List<QuestionVM> list=questionService.query(keywords);
 			return MsgResponse.success("success", list);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -92,19 +80,7 @@ public class QuestionController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="更新保存题库信息",notes="如果id为空，则保存信息，否则是更新信息 " )
-	@PostMapping("saveOrUpdate")
-	public MsgResponse saveOrUpdate(Question question){
-		try {
-			questionService.saveOrUpdate(question);
-			return MsgResponse.success("success",null );
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			//返回失败
-			return MsgResponse.error(e.getMessage());
-		}
-	}
+	
 	@ApiOperation(value="批量删除题库内的信息",notes="批量删除时输入的id号之间用,隔开" )
 	@GetMapping("batchDelete")
 	public MsgResponse batchDelete(Long[] ids){
@@ -118,19 +94,7 @@ public class QuestionController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="更新保存题库信息",notes="如果id为空，则保存信息，否则是更新信息,并且提交相关选项 " )
-	@PostMapping("saveOrUpdateQuestion")
-	public MsgResponse saveOrUpdateQuestion(Question question){
-		try {
-			questionService.saveOrUpdate(question);
-			return MsgResponse.success("success",null );
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			//返回失败
-			return MsgResponse.error(e.getMessage());
-		}
-	}
+	
 	@ApiOperation(value="保存或修改问题",
   			notes="当id不为空表示修改，否则表示更新，保存和更新的时候需要提交选项数据")
   	@PostMapping("saveOrUpdateQuestionVM")

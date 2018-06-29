@@ -23,46 +23,36 @@ public class QuestionServiceImpl implements IQuestionService{
 	private QuestionVMMapper questionVMMapper;
 	@Autowired
 	private OptionsMapper optionsMapper;
+	
+	
+    //查询题库信息并且显示出选项
 	@Override
-	//查询所有题库信息
-	public List<Question> findAll() throws Exception {
+	public List<QuestionVM> findAllQuestionVM() throws Exception {
 		// TODO Auto-generated method stub
-		QuestionExample example=new QuestionExample();
-		return questionMapper.selectByExample(example);
+		return questionVMMapper.selectAll();
 	}
-	//通过id查询题库信息
+	
+	//通过id查询信息并且显示出选项内容
 	@Override
-	public Question findById(long id) throws Exception {
+	public QuestionVM findById(Long id) throws Exception {
 		// TODO Auto-generated method stub
-		QuestionExample example=new QuestionExample();
-		return questionMapper.selectByPrimaryKey(id);
+		return questionVMMapper.selectById(id);
 	}
+
 	//通过关键字查询题库信息
 	@Override
-	public List<Question> query(String keywords) throws Exception {
-		// TODO Auto-generated method stub
-		QuestionExample example = new QuestionExample();
-		//添加一个条件，name属性中包含keywords关键字
-		example.createCriteria().andNameLike("%"+keywords+"%");		
-		return questionMapper.selectByExample(example);		
+	public List<QuestionVM> query(String keywords) throws Exception {
+		// TODO Auto-generated method stub		
+		return questionVMMapper.query(keywords);		
 	}
-	//更新或保存题库信息
-	@Override
-	public void saveOrUpdate(Question question) throws Exception {
-		// TODO Auto-generated method stub
-		if(question.getId()!=null){
-			questionMapper.updateByPrimaryKey(question);
-		}else{
-			questionMapper.insert(question);
-		}
-		
-	}
+	
 	//通过id删除题库信息
 	@Override
 	public void deleteById(long id) throws Exception {
 		// TODO Auto-generated method stub
 		questionMapper.deleteByPrimaryKey(id);
 	}
+	
 	//批量删除题库信息
 	@Override
 	public void batchDelete(Long[] ids) throws Exception {
@@ -71,12 +61,9 @@ public class QuestionServiceImpl implements IQuestionService{
 			questionMapper.deleteByPrimaryKey(id);
 		}
 	}
-    //查询题库信息并且显示出选项
-	@Override
-	public List<QuestionVM> findAllQuestionVM() throws Exception {
-		// TODO Auto-generated method stub
-		return questionVMMapper.selectAll();
-	}
+	
+	
+	
 	/*
 	 * 保存或修改问题，判断是单选还是多选还是简答
 	 * @see com.briup.apps.poll.service.IQuestionService#saveOrUpdate(com.briup.apps.poll.bean.extend.QuestionVM)
@@ -138,6 +125,7 @@ public class QuestionServiceImpl implements IQuestionService{
  		 */
 	}
 
+	
 	
 }
 	

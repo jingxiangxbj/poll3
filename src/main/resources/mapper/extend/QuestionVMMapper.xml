@@ -6,6 +6,16 @@
 		<!-- id name questionType -->
 	</select>
 	
+	<select id="selectById" resultMap="QuestionVMResultMap">
+ 		select * from poll_question where id = #{id}
+ 		<!-- id,name,description -->
+   </select>
+   
+   <select id="query" resultMap="QuestionVMResultMap">
+ 		select * from poll_question where name like "%"#{name}"%"
+ 		<!-- id,name,description -->
+   </select>
+
 	<select id="slectAllQuestion" parameterType="long"
 		resultMap="QuestionVMResultMap">
 		select * from poll_question where id in (select question_id
