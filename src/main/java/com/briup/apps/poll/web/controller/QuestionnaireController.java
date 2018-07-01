@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
 public class QuestionnaireController {
 	@Autowired
 	private IQuestionnaireService questionnaireService;
-	
+	@ApiOperation(value="查找所有问题及选项")
 	@GetMapping("findAllQuestionnaireVM")
 	public MsgResponse findAllQuestionnaireVM(){
 		try {
@@ -35,7 +35,19 @@ public class QuestionnaireController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	
+	@ApiOperation(value="通过id查找问题及选项")
+	@PostMapping("findQuestionnaireVMById")
+	public MsgResponse findQuestionnaireVMById(long id){
+		try {
+			QuestionnaireVM qnvm=questionnaireService.selectById(id);
+			return MsgResponse.success("success", qnvm);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//返回失败
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	@ApiOperation(value="查询所有")
 	@GetMapping("findAll")
 	public MsgResponse findAll(){
@@ -59,27 +71,16 @@ public class QuestionnaireController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="通过关键字查询")
+	@ApiOperation(value="通过关键词查询问卷信息" )
 	@GetMapping("query")
 	public MsgResponse query(String keywords){
 		try {
-			List<Questionnaire> list = questionnaireService.query(keywords);
+			List<QuestionnaireVM> list=questionnaireService.query(keywords);
 			return MsgResponse.success("success", list);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
-	}
-	@ApiOperation(value="添加和修改", notes="保存不可输入id,修改id须和数据库一致")
-	@PostMapping("saveOrUpdate")
-	public MsgResponse saveOrUpdate(Questionnaire questionnaire){
-		try {
-			questionnaireService.saveOrUpdate(questionnaire);
-			return MsgResponse.success("success", null);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			//返回失败
 			return MsgResponse.error(e.getMessage());
 		}
 	}
@@ -104,6 +105,18 @@ public class QuestionnaireController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.getMessage();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@ApiOperation(value="保存或修改问题及选项",
+  			notes="当id不为空表示修改，否则表示更新，保存和更新的时候需要提交选项数据")
+	@PostMapping("saveOrUpdateQuestionnaire")
+	public MsgResponse saveOrUpdateQuestionnaire(Questionnaire questionnaire,long[] questionIds){
+		try {
+			questionnaireService.saveOrUpdate(questionnaire, questionIds);
+			return MsgResponse.success("保存或修改成功", null);
+		} catch (Exception e) {
+			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
 	}

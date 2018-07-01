@@ -4,7 +4,13 @@
 	<select id="selectAll" resultMap="QuestionnaireVMResultMap">
 		select * from poll_questionnaire
 	</select>
-
+<select id="selectById"  resultMap="QuestionnaireVMResultMap">
+		select * from poll_questionnaire where id=#{id}
+	</select>
+	 <select id="query" resultMap="QuestionnaireVMResultMap">
+ 		select * from poll_questionnaire where name like "%"#{name}"%"
+ 		<!-- id,name,description -->
+   </select>
 	<!-- 定义结果集 -->
 	<resultMap id="QuestionnaireVMResultMap"
 		type="com.briup.apps.poll.bean.extend.QuestionnaireVM">
@@ -13,7 +19,8 @@
 		<result column="description" property="description" />
 		
 		<collection column="id" property="questions" javaType="ArrayList"
-			ofType="com.briup.apps.poll.bean.extend.QuestionVM" select="com.briup.apps.poll.dao.extend.QuestionVMMapper.slectAllQuestion">
+			ofType="com.briup.apps.poll.bean.extend.QuestionVM"
+			 select="com.briup.apps.poll.dao.extend.QuestionVMMapper.slectAllQuestion">
 		</collection>
 	</resultMap>
 

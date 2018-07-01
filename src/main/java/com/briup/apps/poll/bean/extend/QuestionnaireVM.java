@@ -2,8 +2,7 @@ package com.briup.apps.poll.bean.extend;
 
 import java.util.List;
 
-import com.briup.apps.poll.bean.Qq;
-import com.briup.apps.poll.bean.Question;
+
 
 
 public class QuestionnaireVM {
