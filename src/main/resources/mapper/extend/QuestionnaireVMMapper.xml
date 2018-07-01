@@ -9,7 +9,6 @@
 	</select>
 	 <select id="query" resultMap="QuestionnaireVMResultMap">
  		select * from poll_questionnaire where name like "%"#{name}"%"
- 		<!-- id,name,description -->
    </select>
 	<!-- 定义结果集 -->
 	<resultMap id="QuestionnaireVMResultMap"
